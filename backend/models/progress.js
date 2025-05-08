@@ -37,4 +37,4 @@ const progressSchema = new Schema({
 progressSchema.index({ userId: 1, month: 1, year: 1 }, { unique: true });
 
 const progressModel = mongoose.model("progress", progressSchema);
-export default progressModel; 
+export default progressModel;
