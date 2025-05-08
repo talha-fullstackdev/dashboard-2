@@ -28,16 +28,14 @@ const login = async (req, res) => {
     if (!user) {
       return res
         .status(404)
-        .json({ message: "User not found", success: false });
+        .json({ message: "User not found!", success: false });
     }
     const isPassEqual = await bcrypt.compare(password, user.password);
     if (!isPassEqual) {
-      return res
-        .status(401)
-        .json({
-          message: "Wrong email or password! try again",
-          success: false,
-        });
+      return res.status(401).json({
+        message: "Wrong email or password! try again",
+        success: false,
+      });
     }
     const jwtToken = jwt.sign(
       { email: user.email, _id: user._id },
@@ -45,7 +43,7 @@ const login = async (req, res) => {
       { expiresIn: "24h" }
     );
     res.status(200).json({
-      msg: "Login successful",
+      msg: "login successful",
       success: true,
       jwtToken,
       email,
@@ -53,7 +51,7 @@ const login = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: "Server error!", success: false });
+    return res.status(500).json({ msg: "Server error!", success: false });
   }
 };
 export { login };
