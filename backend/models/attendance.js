@@ -9,7 +9,7 @@ const attendanceSchema = new Schema({
   },
   username: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
@@ -30,4 +30,4 @@ const attendanceSchema = new Schema({
 });
 
 const attendanceModel = mongoose.model("attendance", attendanceSchema);
-export default attendanceModel; 
+export default attendanceModel;
