@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 
-
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const navigate = useNavigate();
@@ -38,8 +37,7 @@ const DashboardLayout = ({ children }) => {
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="text-white focus:outline-none cursor-pointer"
           >
-            {sidebarOpen ? <FaArrowAltCircleLeft /> : <FaArrowAltCircleRight />
-            }
+            {sidebarOpen ? <FaArrowAltCircleLeft /> : <FaArrowAltCircleRight />}
           </button>
         </div>
         <div className="mt-6">
@@ -157,7 +155,7 @@ const DashboardLayout = ({ children }) => {
 };
 
 DashboardLayout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
-export default DashboardLayout; 
+export default DashboardLayout;
