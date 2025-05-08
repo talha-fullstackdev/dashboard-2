@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom"; // Fixed import
 import useTitle from "../hooks/UseTitle";
 import { toast } from "react-toastify";
@@ -8,6 +8,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const clearInputFields = () => {
+    emailRef.current.value = ""; // Reset fields after successful login
+    passwordRef.current.value = "";
+  };
   const handleLogin = async (e) => {
     e.preventDefault();
     const userLoginData = {
@@ -37,16 +41,14 @@ const LoginPage = () => {
         toast.success("login succes redirecting to home page");
         localStorage.setItem("token", jwtToken);
         localStorage.setItem("loggedInUser", name);
-        emailRef.current.value = ""; // Reset fields after successful login
-        passwordRef.current.value = "";
+        clearInputFields();
       } else if (error) {
         const errorDetails = error?.details[0].message;
         toast.error(errorDetails);
         return;
       } else if (!success) {
         toast.error(message);
-        emailRef.current.value = ""; // Reset fields after successful login
-        passwordRef.current.value = "";
+        clearInputFields(); // Reset fields after successful login
       }
     } catch (err) {
       console.error(err);
