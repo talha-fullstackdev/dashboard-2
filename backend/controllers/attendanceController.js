@@ -107,3 +107,4 @@ export const getAttendanceHistory = async (req, res) => {
     res.status(500).json({ msg: "Server error!", success: false });
   }
 }; 
+//
