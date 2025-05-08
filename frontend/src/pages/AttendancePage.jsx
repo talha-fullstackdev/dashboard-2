@@ -43,13 +43,13 @@ const AttendancePage = () => {
       // Check if there's an attendance record for today
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
+
       const todayRecord = attendanceData.find((record) => {
         const recordDate = new Date(record.date);
         recordDate.setHours(0, 0, 0, 0);
         return recordDate.getTime() === today.getTime();
       });
-      
+
       setTodayAttendance(todayRecord || null);
       setLoading(false);
     } catch (err) {
@@ -114,30 +114,30 @@ const AttendancePage = () => {
   const formatTime = (dateString) => {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
-    
+
     // Get hours (0-23)
     let hours = date.getHours();
-    
+
     // Convert to 12-hour format
-    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
-    
+
     // Get minutes and pad with leading zero if needed
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+
     return `${hours}:${minutes}${ampm}`;
   };
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
-    
+
     // Get month (1-12), day, and year
     const month = date.getMonth() + 1; // getMonth() returns 0-11
     const day = date.getDate();
     const year = date.getFullYear();
-    
+
     return `${month}/${day}/${year}`;
   };
 
@@ -174,7 +174,10 @@ const AttendancePage = () => {
   if (error) {
     return (
       <DashboardLayout>
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
           <strong className="font-bold">Error!</strong>
           <span className="block sm:inline"> {error}</span>
         </div>
@@ -187,10 +190,12 @@ const AttendancePage = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">Attendance Tracker</h2>
         <div className="bg-blue-50 px-4 py-2 rounded-lg text-blue-700 font-medium">
-          <p>{formatDate(currentDateTime)} | {formatTime(currentDateTime)}</p>
+          <p>
+            {formatDate(currentDateTime)} | {formatTime(currentDateTime)}
+          </p>
         </div>
       </div>
-      
+
       {/* Today&apos;s Attendance Card */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h3 className="text-lg font-semibold mb-4">Today&apos;s Attendance</h3>
@@ -201,7 +206,9 @@ const AttendancePage = () => {
               {todayAttendance ? (
                 <span className="text-green-600 font-semibold">Present</span>
               ) : (
-                <span className="text-yellow-600 font-semibold">Not Marked</span>
+                <span className="text-yellow-600 font-semibold">
+                  Not Marked
+                </span>
               )}
             </p>
             {todayAttendance && (
@@ -247,7 +254,9 @@ const AttendancePage = () => {
       {/* Attendance History */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold mb-2 md:mb-0">Attendance History</h3>
+          <h3 className="text-lg font-semibold mb-2 md:mb-0">
+            Attendance History
+          </h3>
           <div className="flex flex-col sm:flex-row sm:space-x-4">
             <div className="mb-2 sm:mb-0">
               <select
@@ -280,7 +289,9 @@ const AttendancePage = () => {
 
         {attendanceHistory.length === 0 ? (
           <div className="bg-gray-50 p-6 text-center rounded-lg">
-            <p className="text-gray-500">No attendance records found for this month</p>
+            <p className="text-gray-500">
+              No attendance records found for this month
+            </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -298,19 +309,26 @@ const AttendancePage = () => {
               <tbody className="text-gray-600 text-sm">
                 {attendanceHistory.map((record) => {
                   const checkInTime = new Date(record.checkIn);
-                  const checkOutTime = record.checkOut ? new Date(record.checkOut) : null;
-                  
+                  const checkOutTime = record.checkOut
+                    ? new Date(record.checkOut)
+                    : null;
+
                   // Calculate duration
                   let duration = "N/A";
                   if (checkOutTime) {
                     const durationMs = checkOutTime - checkInTime;
                     const hours = Math.floor(durationMs / (1000 * 60 * 60));
-                    const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+                    const minutes = Math.floor(
+                      (durationMs % (1000 * 60 * 60)) / (1000 * 60)
+                    );
                     duration = `${hours}h ${minutes}m`;
                   }
-                  
+
                   return (
-                    <tr key={record._id} className="border-b border-gray-200 hover:bg-gray-50">
+                    <tr
+                      key={record._id}
+                      className="border-b border-gray-200 hover:bg-gray-50"
+                    >
                       <td className="py-3 px-6 text-left">
                         {formatDate(record.date)}
                       </td>
@@ -341,4 +359,4 @@ const AttendancePage = () => {
   );
 };
 
-export default AttendancePage; 
+export default AttendancePage;
