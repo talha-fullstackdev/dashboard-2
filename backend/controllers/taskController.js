@@ -5,7 +5,9 @@ import mongoose from "mongoose";
 export const getUserTasks = async (req, res) => {
   try {
     const userId = req.userId;
-    const tasks = await taskModel.find({ assignedTo: userId }).sort({ dueDate: 1 });
+    const tasks = await taskModel
+      .find({ assignedTo: userId })
+      .sort({ dueDate: 1 });
     res.status(200).json({ success: true, tasks });
   } catch (error) {
     console.error(error);
@@ -35,27 +37,27 @@ export const createTask = async (req, res) => {
 export const updateTaskStatus = async (req, res) => {
   try {
     const { taskId, status } = req.body;
-    
+
     if (!mongoose.Types.ObjectId.isValid(taskId)) {
       return res.status(400).json({ msg: "Invalid task ID", success: false });
     }
-    
+
     const task = await taskModel.findById(taskId);
     if (!task) {
       return res.status(404).json({ msg: "Task not found", success: false });
     }
-    
+
     // Check if the task belongs to the user
     if (task.assignedTo.toString() !== req.userId) {
       return res.status(403).json({ msg: "Unauthorized", success: false });
     }
-    
+
     task.status = status;
     await task.save();
-    
+
     res.status(200).json({ success: true, task });
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Server error!", success: false });
   }
-}; 
+};
