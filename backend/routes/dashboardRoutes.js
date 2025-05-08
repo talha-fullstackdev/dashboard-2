@@ -1,8 +1,19 @@
 import express from "express";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
-import { getUserTasks, createTask, updateTaskStatus } from "../controllers/taskController.js";
-import { checkIn, checkOut, getAttendanceHistory } from "../controllers/attendanceController.js";
-import { getMonthlyProgress, getProgressHistory } from "../controllers/progressController.js";
+import {
+  getUserTasks,
+  createTask,
+  updateTaskStatus,
+} from "../controllers/taskController.js";
+import {
+  checkIn,
+  checkOut,
+  getAttendanceHistory,
+} from "../controllers/attendanceController.js";
+import {
+  getMonthlyProgress,
+  getProgressHistory,
+} from "../controllers/progressController.js";
 
 const router = express.Router();
 
@@ -23,4 +34,4 @@ router.get("/attendance/history", getAttendanceHistory);
 router.get("/progress/monthly", getMonthlyProgress);
 router.get("/progress/history", getProgressHistory);
 
-export default router; 
+export default router;
