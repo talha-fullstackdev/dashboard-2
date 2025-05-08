@@ -4,14 +4,14 @@ import { useNavigate } from "react-router";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     // Redirect to dashboard after login
     navigate("/dashboard");
   }, [navigate]);
-  
+
   useTitle("Redirecting to Dashboard");
-  
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="text-center">
