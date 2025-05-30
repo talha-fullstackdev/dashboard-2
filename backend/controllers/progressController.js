@@ -2,7 +2,6 @@ import progressModel from "../models/progress.js";
 import attendanceModel from "../models/attendance.js";
 import taskModel from "../models/task.js";
 import mongoose from "mongoose";
-
 // Get progress data for a specific month and year
 export const getMonthlyProgress = async (req, res) => {
   try {
