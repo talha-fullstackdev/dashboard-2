@@ -38,7 +38,7 @@ const LoginPage = () => {
         setTimeout(() => {
           navigate("/home");
         }, 2000);
-        toast.success("login succes redirecting to home page");
+        toast.success(`welcome ${name}`);
         localStorage.setItem("token", jwtToken);
         localStorage.setItem("loggedInUser", name);
         clearInputFields();
